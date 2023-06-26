@@ -1,5 +1,0 @@
-Pillow
-numpy
-opencv-python
-pascal-voc-writer
-tqdm
