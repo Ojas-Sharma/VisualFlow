@@ -2,6 +2,10 @@
 
 VisualFlow is a Python library for object detection that provides conversion functions between Pascal VOC, YOLO, and COCO formats. It aims to simplify the process of converting annotated datasets between these popular object detection formats.
 
+We have started this library with the vision of providing end to end object detection, from formatting all the way to inferencing multiple types of object detection models.
+
+Our initial version of VisualFlow allows format conversions between PASCAL VOC, COCO and YOLO. Stay tuned for future updates!
+
 ## Installation
 
 You can install VisualFlow using pip:
@@ -18,20 +22,20 @@ To convert from PASCAL VOC or COCO format to YOLO format, use the to_yolo() func
 
 For VOC to YOLO:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_yolo(input_type='voc',
-       image_folder='path/to/images',
-       ann_folder='path/to/annotations',
-       output_folder='path/to/output')
+vf.to_yolo(in_format='voc',
+       images='path/to/images',
+       annotations='path/to/annotations',
+       out_dir='path/to/output')
 ```
 For COCO to YOLO:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_yolo(input_type='coco',
-       image_folder='path/to/images',
-       output_folder='path/to/output',
+vf.to_yolo(in_format='coco',
+       images='path/to/images',
+       out_dir='path/to/output',
        json_file='path/to/annotations.json')
 ```
 
@@ -40,22 +44,22 @@ To convert from COCO or YOLO format to Pascal VOC format, use the to_voc() funct
 
 For COCO to VOC:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_voc(input_type='coco',
-       image_folder='path/to/images',
-       output_folder='path/to/output',
+vf.to_voc(in_format='coco',
+       images='path/to/images',
+       out_dir='path/to/output',
        json_file='path/to/annotations.json')
 ```
 For YOLO to VOC:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_voc(input_type='yolo',
-       image_folder='path/to/images',
-       ann_folder='path/to/annotations',
+vf.to_voc(in_format='yolo',
+       images='path/to/images',
+       annotations='path/to/annotations',
        class_file='path/to/classes.txt',
-       output_folder='path/to/output')
+       out_dir='path/to/output')
 ```
 
 ### Conversion to COCO Format
@@ -63,21 +67,21 @@ To convert from PASCAL VOC or YOLO format to COCO format, use the to_coco() func
 
 For VOC to COCO:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_coco(input_type='voc',
-       image_folder='path/to/images',
-       ann_folder='path/to/annotations',
+vf.to_coco(in_format='voc',
+       images='path/to/images',
+       annotations='path/to/annotations',
        class_file='path/to/classes.txt',
        output_file_path='path/to/output.json')
 ```
 For YOLO to COCO:
 ```python
-import visualflow as vf
+import VisualFlow as vf
 
-vf.to_coco(input_type='yolo',
-       image_folder='path/to/images',
-       ann_folder='path/to/annotations',
+vf.to_coco(in_format='yolo',
+       images='path/to/images',
+       annotations='path/to/annotations',
        class_file='path/to/classes.txt',
        output_file_path='path/to/output.json')
 ```

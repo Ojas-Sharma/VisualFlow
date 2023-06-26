@@ -44,20 +44,20 @@ def coco2yolo(xmin, ymin, w, h, image_w, image_h):
     y_center = ((2*ymin + h)/(2*image_h))
     return [x_center , y_center, w/image_w, h/image_h]
 
-def to_voc(in_format=None, images=None, annotations=None, class_file=None, out_dir=None, json_file=None):
-    if in_format is None:
+def to_voc(input_type=None, image_folder=None, ann_folder=None, class_file=None, output_folder=None, json_file=None):
+    if input_type is None:
         raise ValueError("Missing input argument: Please provide input type ('yolo' or 'coco')")
-    if out_dir is None:
-        raise ValueError("Missing argument: out_dir")
-    if images is None:
-        raise ValueError("Missing argument: images")
-    if not os.path.isdir(os.path.join(out_dir, "xmls")):
-        os.mkdir(os.path.join(out_dir, "xmls"))
-    if in_format == "yolo":
+    if output_folder is None:
+        raise ValueError("Missing argument: output_folder")
+    if image_folder is None:
+        raise ValueError("Missing argument: image_folder")
+    if not os.path.isdir(os.path.join(output_folder, "xmls")):
+        os.mkdir(os.path.join(output_folder, "xmls"))
+    if input_type == "yolo":
         if class_file is None:
             raise ValueError("Please provide path to classes.txt")
-        if annotations is None:
-            raise ValueError("Missing argument: annotations")
+        if ann_folder is None:
+            raise ValueError("Missing argument: ann_folder")
         else:
             class_dict = {}
             with open(class_file, 'r') as file:
@@ -66,12 +66,12 @@ def to_voc(in_format=None, images=None, annotations=None, class_file=None, out_d
                     class_dict[line_num] = name
 
             image_info = []
-            image_files = [filename for filename in os.listdir(images) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
+            image_files = [filename for filename in os.listdir(image_folder) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
             with tqdm(total=len(image_files), desc="Converting...") as pbar:
-                for filename in os.listdir(images):
+                for filename in os.listdir(image_folder):
                     if filename.endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                        image_path = os.path.join(images, filename)
-                        label_path = os.path.join(annotations, filename.rsplit(".", 1)[0] + ".txt")
+                        image_path = os.path.join(image_folder, filename)
+                        label_path = os.path.join(ann_folder, filename.rsplit(".", 1)[0] + ".txt")
                         try:
                             image_width, image_height = 0, 0
                             with Image.open(image_path) as img:
@@ -98,7 +98,7 @@ def to_voc(in_format=None, images=None, annotations=None, class_file=None, out_d
                         pbar.update(1)
             print("Completed!")
 
-    if in_format == "coco":
+    if input_type == "coco":
         if json_file is None:
             raise ValueError("Missing argument: json_file. Please provide path to json file")
         else:
@@ -122,38 +122,38 @@ def to_voc(in_format=None, images=None, annotations=None, class_file=None, out_d
                 for im in coco['images']:
                     result = []
                     bboxes = bbox_mapping[im["id"]]
-                    image_path = os.path.join(images, os.path.basename(im["file_name"]))
+                    image_path = os.path.join(image_folder, os.path.basename(im["file_name"]))
                     writer = Writer(image_path, im["width"], im["height"])
                     for bbox in bboxes:
                         voc_bbox = coco2pascalvoc(bbox[1], bbox[2], bbox[3], bbox[4])
                         writer.addObject(class_mapping[bbox[0]], voc_bbox[0], voc_bbox[1], voc_bbox[2], voc_bbox[3])
                     xml_filename = os.path.basename(im["file_name"]).rsplit(".", 1)[0]
-                    writer.save(os.path.join(out_dir, "xmls", xml_filename + ".xml"))
+                    writer.save(os.path.join(output_folder, "xmls", xml_filename + ".xml"))
                     pbar.update(1)
             print("Completed!")
 
 
-def to_yolo(in_format=None, images=None, annotations=None, out_dir=None, json_file=None):
-    if in_format is None:
+def to_yolo(input_type=None, image_folder=None, ann_folder=None, output_folder=None, json_file=None):
+    if input_type is None:
         raise ValueError("Missing input argument: Please provide input type ('voc' or 'coco')")
-    if out_dir is None:
-        raise ValueError("Missing argument: out_dir")
-    if images is None:
-        raise ValueError("Missing argument: images")
-    if not os.path.isdir(os.path.join(out_dir, "labels")):
-        os.mkdir(os.path.join(out_dir, "labels"))
-    if in_format == "voc":
-        if annotations is None:
-            raise ValueError("Missing argument: annotations")
+    if output_folder is None:
+        raise ValueError("Missing argument: output_folder")
+    if image_folder is None:
+        raise ValueError("Missing argument: image_folder")
+    if not os.path.isdir(os.path.join(output_folder, "labels")):
+        os.mkdir(os.path.join(output_folder, "labels"))
+    if input_type == "voc":
+        if ann_folder is None:
+            raise ValueError("Missing argument: ann_folder")
         else:
             class_lst = []
-            class_path = os.path.join(out_dir, "classes.txt")
-            image_files = [filename for filename in os.listdir(images) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
+            class_path = os.path.join(output_folder, "classes.txt")
+            image_files = [filename for filename in os.listdir(image_folder) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
             with tqdm(total=len(image_files), desc="Converting...") as pbar:
-                for filename in os.listdir(images):
+                for filename in os.listdir(image_folder):
                     if filename.endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                        image_path = os.path.join(images, filename)
-                        label_path = os.path.join(annotations, filename.rsplit(".", 1)[0] + ".xml")
+                        image_path = os.path.join(image_folder, filename)
+                        label_path = os.path.join(ann_folder, filename.rsplit(".", 1)[0] + ".xml")
                         try:
                             image_width, image_height = 0, 0
                             with Image.open(image_path) as img:
@@ -175,7 +175,7 @@ def to_yolo(in_format=None, images=None, annotations=None, out_dir=None, json_fi
 
                             if result:
                                 label_name = filename.rsplit(".", 1)[0] + ".txt"
-                                with open(os.path.join(out_dir, "labels", label_name), "w", encoding="utf-8") as f:
+                                with open(os.path.join(output_folder, "labels", label_name), "w", encoding="utf-8") as f:
                                     f.write("\n".join(result))
                         except OSError:
                             print(image_path + " skipped")
@@ -186,7 +186,7 @@ def to_yolo(in_format=None, images=None, annotations=None, out_dir=None, json_fi
                         f.write(item + '\n')
             print("Completed!")
 
-    if in_format == "coco":
+    if input_type == "coco":
         if json_file is None:
             raise ValueError("Missing argument: json_file. Please provide path to json file")
         else:
@@ -217,23 +217,23 @@ def to_yolo(in_format=None, images=None, annotations=None, out_dir=None, json_fi
                     if result:
                         image_filename = os.path.basename(im["file_name"]).rsplit(".", 1)[0]
 
-                        with open(os.path.join(out_dir, "labels", f"{image_filename}.txt"), "w", encoding="utf-8") as f:
+                        with open(os.path.join(output_folder, "labels", f"{image_filename}.txt"), "w", encoding="utf-8") as f:
                             f.write("\n".join(result))
                     pbar.update(1)
             print("Completed!")
 
 
 
-def to_coco(in_format=None, images=None, annotations=None, class_file=None, output_file_path=None):
-    if in_format is None:
+def to_coco(input_type=None, image_folder=None, ann_folder=None, class_file=None, output_file_path=None):
+    if input_type is None:
         raise ValueError("Missing input argument: Please provide input type ('yolo' or 'voc')")
     if output_file_path is None:
         raise ValueError("Missing argument: output_file_path")
-    if images is None:
-        raise ValueError("Missing argument: images")
-    if annotations is None:
-        raise ValueError("Missing argument: annotations")
-    if in_format == "yolo":
+    if image_folder is None:
+        raise ValueError("Missing argument: image_folder")
+    if ann_folder is None:
+        raise ValueError("Missing argument: ann_folder")
+    if input_type == "yolo":
         if class_file is None:
             raise ValueError("Please provide path to classes.txt which has a list of all your classes (one class on each line)")
         coco = {"images": [{}], "categories": [], "annotations": [{}]}
@@ -241,12 +241,12 @@ def to_coco(in_format=None, images=None, annotations=None, class_file=None, outp
         ann_id = 1
         image_info = []
         ann_info = []
-        image_files = [filename for filename in os.listdir(images) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
+        image_files = [filename for filename in os.listdir(image_folder) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
         with tqdm(total=len(image_files), desc="Converting...") as pbar:
-            for filename in os.listdir(images):
+            for filename in os.listdir(image_folder):
                 if filename.endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    image_path = os.path.join(images, filename)
-                    label_path = os.path.join(annotations, filename.rsplit(".", 1)[0] + ".txt")
+                    image_path = os.path.join(image_folder, filename)
+                    label_path = os.path.join(ann_folder, filename.rsplit(".", 1)[0] + ".txt")
                     try:
                         image_width, image_height = 0, 0
                         with Image.open(image_path) as img:
@@ -300,7 +300,7 @@ def to_coco(in_format=None, images=None, annotations=None, class_file=None, outp
                 json.dump(coco, outfile, indent=4)
         print("Completed!")
     
-    if in_format == "voc":
+    if input_type == "voc":
         if class_file is None:
             raise ValueError("Please provide path to classes.txt which has a list of all your classes (one class on each line)")
         coco = {"images": [{}], "categories": [], "annotations": [{}]}
@@ -313,12 +313,12 @@ def to_coco(in_format=None, images=None, annotations=None, class_file=None, outp
             for line_num, name in enumerate(file):
                 name = name.strip()
                 class_dict[name] = line_num + 1
-        image_files = [filename for filename in os.listdir(images) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
+        image_files = [filename for filename in os.listdir(image_folder) if filename.endswith(('.png', '.jpg', '.jpeg', '.webp'))]
         with tqdm(total=len(image_files), desc="Converting...") as pbar:
-            for filename in os.listdir(images):
+            for filename in os.listdir(image_folder):
                 if filename.endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    image_path = os.path.join(images, filename)
-                    label_path = os.path.join(annotations, filename.rsplit(".", 1)[0] + ".xml")
+                    image_path = os.path.join(image_folder, filename)
+                    label_path = os.path.join(ann_folder, filename.rsplit(".", 1)[0] + ".xml")
                     tree = ET.parse(label_path)
                     root = tree.getroot()
                     image_height = int(root.find("size")[0].text)
@@ -372,3 +372,6 @@ def to_coco(in_format=None, images=None, annotations=None, class_file=None, outp
             with open(output_file_path, "w") as outfile:
                 json.dump(coco, outfile, indent=4)
         print("Completed!")
+
+
+

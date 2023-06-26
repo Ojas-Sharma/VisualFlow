@@ -1,5 +1,4 @@
-import cvtoolkit as cvt
-
+import VisualFlow as vf
 ## YOLO
 ## -- images folder
 ## -- labels folder (.txt)
@@ -13,10 +12,10 @@ import cvtoolkit as cvt
 ## -- Images folder
 ## -- 1 JSON file
 
-# to_coco(input_type="voc", image_folder="/home/ubuntu/test/images", ann_folder="/home/ubuntu/test/xmls/", output_file_path="/home/ubuntu/test/testing_voc.json", class_file="/home/ubuntu/test/classes.txt")
-# to_yolo(input_type="voc", image_folder="/home/ubuntu/3k_dump/images", ann_folder="/home/ubuntu/3k_dump/xmls/", output_folder="/home/ubuntu/3k_dump/")
-# to_coco(input_type="yolo", image_folder="/home/ubuntu/test/images", ann_folder="/home/ubuntu/test/labels/", output_file_path="/home/ubuntu/test/testing.json", class_file="/home/ubuntu/test/classes.txt")
-# to_yolo(input_type="coco", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+vf.to_coco(in_format="voc", images="/home/ubuntu/test/images", annotations="/home/ubuntu/test/xmls/", output_file_path="/home/ubuntu/test/testing_voc.json", class_file="/home/ubuntu/test/classes.txt")
+vf.to_yolo(in_format="voc", images="/home/ubuntu/3k_dump/images", annotations="/home/ubuntu/3k_dump/xmls/", out_dir="/home/ubuntu/3k_dump/")
+vf.to_coco(in_format="yolo", images="/home/ubuntu/test/images", annotations="/home/ubuntu/test/labels/", output_file_path="/home/ubuntu/test/testing.json", class_file="/home/ubuntu/test/classes.txt")
+vf.to_yolo(in_format="coco", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 
 
 # Empty image folder
@@ -26,49 +25,49 @@ import cvtoolkit as cvt
 
 # No input type -- tested
 try:
-    cvt.to_voc(image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # no Images folder -- tested
 try:
-    cvt.to_voc(input_type="coco", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(in_format="coco", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 # No output folder -- tested
 
 try:
-    cvt.to_voc(input_type="coco", image_folder="/home/ubuntu/test/images", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(in_format="coco", images="/home/ubuntu/test/images", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 # No json file given -- tested
 
 try:
-    cvt.to_voc(input_type="coco", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/")
+    vf.to_voc(in_format="coco", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # input type something else -- tested
 try:
-    cvt.to_voc(input_type="something", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(in_format="something", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # json file given when going from yolo -- tested
 try:
-    cvt.to_voc(input_type="yolo", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(in_format="yolo", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # incorrect parameter name -- tested
 try:
-    cvt.to_voc(input="coco", image_foldr="/home/ubuntu/test/images", outut_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_voc(input="coco", image_foldr="/home/ubuntu/test/images", outut_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except TypeError as e:
     print("Test passed: {}".format(e))
 
 # relative paths given -- tested
 try:
-    cvt.to_voc(input_type="coco", image_folder="../../test/images", output_folder="../../test/", json_file="../../test/testing.json")
+    vf.to_voc(in_format="coco", images="../../test/images", out_dir="../../test/", json_file="../../test/testing.json")
     print("Test passed")
 except ValueError as e:
     print("Test failed: {}".format(e))
@@ -79,44 +78,44 @@ except ValueError as e:
 # to_coco
 # No input type
 try:
-    cvt.to_coco(image_folder="/home/ubuntu/test/images", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
+    vf.to_coco(images="/home/ubuntu/test/images", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # no Images folder -- tested
 try:
-    cvt.to_coco(input_type="voc", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
+    vf.to_coco(in_format="voc", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # No output file path -- tested
 try:
-    cvt.to_coco(input_type="yolo", image_folder="/home/ubuntu/test/images", ann_folder = "../../test/labels_test/", class_file="/home/ubuntu/test/classes.txt")
+    vf.to_coco(in_format="yolo", images="/home/ubuntu/test/images", annotations = "../../test/labels_test/", class_file="/home/ubuntu/test/classes.txt")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # No class file with yolo input type -- tested
 try:
-    cvt.to_coco(input_type="yolo", image_folder="/home/ubuntu/test/images", ann_folder = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json")
+    vf.to_coco(in_format="yolo", images="/home/ubuntu/test/images", annotations = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # input type something else -- tested
 try:
-    cvt.to_coco(input_type="something", image_folder="/home/ubuntu/test/images", ann_folder = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
+    vf.to_coco(in_format="something", images="/home/ubuntu/test/images", annotations = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="/home/ubuntu/test/classes.txt")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # relative paths given -- tested
 try:
-    cvt.to_coco(input_type="voc", image_folder="../../test/images", ann_folder = "../../test/xmls/", output_file_path="../../test/testing_coco.json", class_file="../../test/classes.txt")
+    vf.to_coco(in_format="voc", images="../../test/images", annotations = "../../test/xmls/", output_file_path="../../test/testing_coco.json", class_file="../../test/classes.txt")
     print("Test passed")
 except ValueError as e:
     print("Test failed: {}".format(e))
 
 # classes.txt path given but does not exist -- tested
 try:
-    cvt.to_coco(input_type="yolo", image_folder="/home/ubuntu/test/images", ann_folder = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="../../test/classes.txt")
+    vf.to_coco(in_format="yolo", images="/home/ubuntu/test/images", annotations = "../../test/labels_test/", output_file_path="/home/ubuntu/test/testing_coco.json", class_file="../../test/classes.txt")
 except FileNotFoundError as e:
     print("Test passed: {}".format(e))
 
@@ -127,37 +126,37 @@ except FileNotFoundError as e:
 
 # No input type
 try:
-    cvt.to_yolo(image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_yolo(images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # no Images folder
 try:
-    cvt.to_yolo(input_type="coco", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_yolo(in_format="coco", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # No output folder
 try:
-    cvt.to_yolo(input_type="coco", image_folder="/home/ubuntu/test/images", json_file="/home/ubuntu/test/testing.json")
+    vf.to_yolo(in_format="coco", images="/home/ubuntu/test/images", json_file="/home/ubuntu/test/testing.json")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # No json file given
 try:
-    cvt.to_yolo(input_type="coco", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/")
+    vf.to_yolo(in_format="coco", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/")
 except ValueError as e:
     print("Test passed: {}".format(e))
 
 # input type something else
 try:
-    cvt.to_yolo(input_type="something", image_folder="/home/ubuntu/test/images", output_folder="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
+    vf.to_yolo(in_format="something", images="/home/ubuntu/test/images", out_dir="/home/ubuntu/test/", json_file="/home/ubuntu/test/testing.json")
 except TypeError as e:
     print("Test passed: {}".format(e))
 
 # relative paths given
 try:
-    cvt.to_yolo(input_type="coco", image_folder="../../test/images", output_folder="../../test/", json_file="../../test/testing.json")
+    vf.to_yolo(in_format="coco", images="../../test/images", out_dir="../../test/", json_file="../../test/testing.json")
     print("Test passed")
 except ValueError as e:
     print("Test failed: {}".format(e))
