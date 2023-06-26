@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='VisualFlow',
-    version='0.1.3',
+    version='0.1.4',
     author='Ojas Sharma',
     author_email='ojassharma1607@gmail.com',
     description='A Python library for object detection format conversion',

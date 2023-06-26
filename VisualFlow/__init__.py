@@ -1,1 +1,1 @@
-from visualflow import *
+from VisualFlow.visualflow import *
