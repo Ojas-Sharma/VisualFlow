@@ -120,25 +120,50 @@ VisualFlow's powerful data augmentations can enhance your object detection train
 Some examples are available below
 ```python
 import VisualFlow as vf
-vf.cutout(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output', max_num_cutouts=3) # last argument is optional, since it is set by default
 
-vf.grayscale(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output')
+vf.cutout(image_dir='path/to/images', 
+          labels_dir='path/to/labels', # optional
+          output_dir='path/to/output', 
+          max_num_cutouts=3) # optional, set by default
 
-vf.brightness(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output', factor=1.5) # last argument is optional, since it is set by default
+vf.grayscale(image_dir='path/to/images', 
+             labels_dir='path/to/labels', # optional
+             output_dir='path/to/output')
 
-vf.noise(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output')
+vf.brightness(image_dir='path/to/images', 
+              labels_dir='path/to/labels', # optional
+              output_dir='path/to/output', 
+              factor=1.5) # optional, set by default
 
-vf.blur(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output')
+vf.noise(image_dir='path/to/images', 
+         labels_dir='path/to/labels', #optional
+         output_dir='path/to/output')
 
-vf.hue(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output')
+vf.blur(image_dir='path/to/images', 
+        labels_dir='path/to/labels', # optional
+        output_dir='path/to/output')
 
-vf.exposure(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output', factor=2.0) # last argument is optional, since it is set by default
+vf.hue(image_dir='path/to/images', 
+       labels_dir='path/to/labels', # optional
+       output_dir='path/to/output')
 
-vf.flip90(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output')
+vf.exposure(image_dir='path/to/images', 
+            labels_dir='path/to/labels', # optional
+            output_dir='path/to/output', 
+            factor=2.0) # optional, set by default
 
-vf.shear(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output', shear_factor= 0.2) # last argument is optional, since it is set by default
+vf.flip90(image_dir='path/to/images', 
+          labels_dir='path/to/labels', 
+          output_dir='path/to/output')
 
-vf.rotate(image_dir='path/to/images', labels_dir='path/to/labels', output_dir='path/to/output', angle=30) # last argument is optional, since it is set by default
+vf.shear(image_dir='path/to/images', 
+         labels_dir='path/to/labels', 
+         output_dir='path/to/output', 
+         shear_factor= 0.2) # optional, set by default
+
+vf.rotate(image_dir='path/to/images', 
+          labels_dir='path/to/labels', 
+          output_dir='path/to/output', angle=30) # optional, set by default
 ```
 
 ## Contributing
