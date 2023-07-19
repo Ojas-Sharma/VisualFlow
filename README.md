@@ -11,12 +11,12 @@ We have started this library with the vision of providing end to end object dete
 
 Our initial version of VisualFlow allows format conversions between PASCAL VOC, COCO and YOLO. Stay tuned for future updates!
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-  - [Conversions](#Conversions)
-  - [Augmentations](#Augmentations)
-- [Contributing](#Contributing)
-- [License](#License)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Conversions](#conversions)
+  - [Augmentations](#augmentations)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
