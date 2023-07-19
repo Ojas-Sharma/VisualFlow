@@ -1,6 +1,6 @@
 # VisualFlow
 
-![VisualFlow Logo](https://github.com/Ojas-Sharma/VisualFlow/tree/main/images/vf_logo.webp)
+![VisualFlow Logo](images/vf_logo.webp)
 
 [![PyPI version](https://badge.fury.io/py/visualflow.svg)](https://badge.fury.io/py/visualflow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
