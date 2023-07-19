@@ -6,44 +6,6 @@ from PIL import Image
 import xml.etree.ElementTree as ET
 import json
 
-# Convert Yolo bb to Pascal_voc bb
-def yolo2pascalvoc(x_center, y_center, w, h,  image_w, image_h):
-    w = w * image_w
-    h = h * image_h
-    xmin = ((2 * x_center * image_w) - w)/2
-    ymin = ((2 * y_center * image_h) - h)/2
-    xmax = xmin + w
-    ymax = ymin + h
-    return [xmin, ymin, xmax, ymax]
-
-def coco2pascalvoc(xmin, ymin, w, h):
-    return [xmin,ymin, xmin + w, ymin + h]
-
-
-def pascalvoc2yolo(xmin, ymin, xmax, ymax, image_w, image_h):
-    x_center = ((xmax + xmin)/(2*image_w))
-    y_center = ((ymax + ymin)/(2*image_h))
-    w = (xmax - xmin)/image_w
-    h = (ymax - ymin)/image_h
-    return [x_center, y_center, w, h]
-
-def yolo2coco(x_center, y_center, w, h,  image_w, image_h):
-    w = w * image_w
-    h = h * image_h
-    xmin = ((2 * x_center * image_w) - w)/2
-    ymin = ((2 * y_center * image_h) - h)/2
-    return [xmin, ymin, w, h]
-
-def pascalvoc2coco(xmin, ymin, xmax, ymax):
-    w = xmax-xmin
-    h = ymax - ymin
-    return [xmin,ymin, w, h]
-
-def coco2yolo(xmin, ymin, w, h, image_w, image_h):
-    x_center = ((2*xmin + w)/(2*image_w))
-    y_center = ((2*ymin + h)/(2*image_h))
-    return [x_center , y_center, w/image_w, h/image_h]
-
 def to_voc(in_format=None, images=None, annotations=None, class_file=None, out_dir=None, json_file=None):
     if in_format is None:
         raise ValueError("Missing input argument: Please provide input type ('yolo' or 'coco')")
