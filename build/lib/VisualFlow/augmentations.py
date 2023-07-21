@@ -32,7 +32,6 @@ def save_yolo_txt_file(yolo_data, output_file):
 
 
 def cutout(image_dir=None, labels_dir=None, output_dir=None, max_num_cutouts=3):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -77,7 +76,6 @@ def cutout(image_dir=None, labels_dir=None, output_dir=None, max_num_cutouts=3):
             shutil.copy(label_path, new_label_path)
 
 def grayscale(image_dir=None, labels_dir=None, output_dir=None):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -106,7 +104,6 @@ def grayscale(image_dir=None, labels_dir=None, output_dir=None):
 
 
 def brightness(image_dir=None, labels_dir=None, output_dir=None, factor=1.5):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -135,7 +132,6 @@ def brightness(image_dir=None, labels_dir=None, output_dir=None, factor=1.5):
             shutil.copy(label_path, new_label_path)
 
 def noise(image_dir=None, labels_dir=None, output_dir=None):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -173,7 +169,6 @@ def noise(image_dir=None, labels_dir=None, output_dir=None):
 
 
 def blur(image_dir=None, labels_dir=None, output_dir=None):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -202,7 +197,6 @@ def blur(image_dir=None, labels_dir=None, output_dir=None):
             shutil.copy(label_path, new_label_path)
 
 def hue(image_dir=None, labels_dir=None, output_dir=None):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -240,7 +234,6 @@ def hue(image_dir=None, labels_dir=None, output_dir=None):
             shutil.copy(label_path, new_label_path)
 
 def exposure(image_dir=None, labels_dir=None, output_dir=None, factor=2.0):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     os.makedirs(output_images_dir, exist_ok=True)
@@ -270,7 +263,6 @@ def exposure(image_dir=None, labels_dir=None, output_dir=None, factor=2.0):
             shutil.copy(label_path, new_label_path)
 
 def flip90(image_dir=None, labels_dir=None, output_dir=None):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     output_labels_dir = os.path.join(output_dir, "labels")
@@ -309,7 +301,6 @@ def flip90(image_dir=None, labels_dir=None, output_dir=None):
             print(f"{image_name}: Skipped due to OSError")
 
 def shear(image_dir=None, labels_dir=None, output_dir=None, shear_factor = 0.2):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     output_labels_dir = os.path.join(output_dir, "labels")
@@ -357,7 +348,6 @@ def shear(image_dir=None, labels_dir=None, output_dir=None, shear_factor = 0.2):
             print(f"{image_name}: Skipped due to OSError")
 
 def rotate(image_dir=None, labels_dir=None, output_dir=None, angle=30):
-    os.makedirs(output_dir, exist_ok=True)
     image_paths = os.listdir(image_dir)
     output_images_dir = os.path.join(output_dir, "images")
     output_labels_dir = os.path.join(output_dir, "labels")
