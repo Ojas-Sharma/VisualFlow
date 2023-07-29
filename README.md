@@ -176,11 +176,11 @@ Inference with VisualFlow is a breeze. Here's a simple example of how you can pe
 ```python
 import VisualFlow as vf
 
-model_path = "/home/ubuntu/walmart_corrected/runs/detect/train/weights/best.pt"
-inference_dir = "/home/ubuntu/test/Walmart/images"
-labels_dir = "/home/ubuntu/test/Walmart/labels"
-class_txt = "/home/ubuntu/test/Walmart/classes.txt"
-output_dir = "/home/ubuntu/test/output"
+model_path = "/path/to/your/yolo_model.pt"
+inference_dir = "/path/to/your/inference_images"
+labels_dir = "/path/to/your/inference_labels"
+class_txt = "/path/to/your/class_names.txt"
+output_dir = "/path/to/your/output_directory"
 
 vf.inference(model_path=model_path,
              inference_dir=inference_dir,
