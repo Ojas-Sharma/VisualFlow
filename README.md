@@ -16,6 +16,7 @@ Our initial version of VisualFlow allows format conversions between PASCAL VOC, 
 - [Usage](#usage)
   - [Conversions](#conversions)
   - [Augmentations](#augmentations)
+  - [Inferences](#inferences)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -166,6 +167,32 @@ vf.rotate(image_dir='path/to/images',
           labels_dir='path/to/labels', 
           output_dir='path/to/output', angle=30) # optional, set by default
 ```
+
+### Inferences
+
+VisualFlow now empowers you to harness the full potential of your YOLO models, making object detection inferencing a seamless part of your workflow. With this new feature, you can confidently evaluate your trained models on your trained models.
+
+Inference with VisualFlow is a breeze. Here's a simple example of how you can perform inferencing on your YOLO models:
+```python
+import VisualFlow as vf
+
+model_path = "/home/ubuntu/walmart_corrected/runs/detect/train/weights/best.pt"
+inference_dir = "/home/ubuntu/test/Walmart/images"
+labels_dir = "/home/ubuntu/test/Walmart/labels"
+class_txt = "/home/ubuntu/test/Walmart/classes.txt"
+output_dir = "/home/ubuntu/test/output"
+
+vf.inference(model_path=model_path,
+             inference_dir=inference_dir,
+             labels_dir=labels_dir,
+             class_txt=class_txt,
+             output_dir=output_dir)
+# additional arguments: iou, conf
+```
+We understand that each object detection project may require different configurations. Therefore, VisualFlow's inference() function now supports two additional parameters:
+
+- **iou**: Set to 0.7 by default, this parameter controls the minimum threshold for bounding box overlap.
+- **conf**: Set to 0.5 by default, this parameter determines the minimum confidence level required for an object detection prediction.
 
 ## Contributing
 
