@@ -6,7 +6,7 @@
 [![Downloads](https://static.pepy.tech/badge/visualflow)](https://pepy.tech/project/visualflow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-VisualFlow is a Python library for object detection that provides conversion functions between Pascal VOC, YOLO, and COCO formats. It aims to simplify the process of converting annotated datasets between these popular object detection formats.
+VisualFlow is a Python library for object detection that aims to provide a model-agnostic, end to end data solution for your object detection needs. Convert your data, augment it, and inference your models simply with a few function calls!
 
 We have started this library with the vision of providing end to end object detection, from formatting all the way to inferencing multiple types of object detection models.
 
