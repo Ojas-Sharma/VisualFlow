@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='VisualFlow',
-    version='0.2.1',
+    version='0.2.3',
     author='Ojas Sharma',
     author_email='ojassharma1607@gmail.com',
     description='A Python library for object detection format conversion',
@@ -25,5 +25,7 @@ setup(
         'pascal-voc-writer',
         'tqdm',
         'Pillow',
+        'ultralytics',
+        'torch'
     ],
 )
