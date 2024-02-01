@@ -170,7 +170,7 @@ vf.rotate(image_dir='path/to/images',
 
 ### Inferences
 
-VisualFlow now empowers you to harness the full potential of your YOLO models, making object detection inferencing a seamless part of your workflow. With this new feature, you can confidently evaluate your trained models on your trained models.
+VisualFlow now empowers you to harness the full potential of your YOLO models, making object detection inferencing a seamless part of your workflow. This new feature, lets you confidently evaluate your trained models.
 
 Inference with VisualFlow is a breeze. Here's a simple example of how you can perform inferencing on your YOLO models:
 ```python
@@ -194,7 +194,7 @@ We understand that each object detection project may require different configura
 - **iou**: Set to 0.7 by default, this parameter controls the minimum threshold for bounding box overlap.
 - **conf**: Set to 0.5 by default, this parameter determines the minimum confidence level required for an object detection prediction.
 
-UPDATE: Visualflow now supports Facebook's DETR! (Please convert for test dataset into YOLO format first using the conversion functionality above.) You can use it as follows:
+UPDATE: Visualflow has some exciting new changes coming this year. One big change that has already been implemented is the capability of using Facebook's DETR. (Please convert for test dataset into YOLO format first using the conversion functionality above.) You can use it as follows:
 ```python
 import VisualFlow as vf
 
