@@ -1,3 +1,20 @@
+Metadata-Version: 2.1
+Name: VisualFlow
+Version: 0.2.3
+Summary: A Python library for object detection format conversion
+Home-page: https://github.com/Ojas-Sharma/VisualFlow
+Author: Ojas Sharma
+Author-email: ojassharma1607@gmail.com
+Keywords: object-detection cvtoolkit pascal-voc yolo coco computer-vision detr image-classification detection format conversion
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # VisualFlow
 
 ![VisualFlow Logo](images/vf_logo.webp)
@@ -182,7 +199,7 @@ labels_dir = "/path/to/your/inference_labels"
 class_txt = "/path/to/your/class_names.txt"
 output_dir = "/path/to/your/output_directory"
 
-vf.yolo_inference(model_path=model_path,
+vf.inference(model_path=model_path,
              inference_dir=inference_dir,
              labels_dir=labels_dir,
              class_txt=class_txt,
@@ -193,23 +210,6 @@ We understand that each object detection project may require different configura
 
 - **iou**: Set to 0.7 by default, this parameter controls the minimum threshold for bounding box overlap.
 - **conf**: Set to 0.5 by default, this parameter determines the minimum confidence level required for an object detection prediction.
-
-UPDATE: Visualflow now supports Facebook's DETR! (Please convert for test dataset into YOLO format first using the conversion functionality above.) You can use it as follows:
-```python
-import VisualFlow as vf
-
-model_path = "/path/to/your/yolo_model.pt"
-inference_dir = "/path/to/your/inference_images"
-labels_dir = "/path/to/your/inference_labels"
-class_txt = "/path/to/your/class_names.txt"
-output_dir = "/path/to/your/output_directory"
-
-vf.detr_inference(model_path=model_path,
-             inference_dir=inference_dir,
-             labels_dir=labels_dir,
-             class_txt=class_txt,
-             output_dir=output_dir)
-```
 
 ## Contributing
 
